@@ -2,6 +2,7 @@ package richard.lipa.Api_ForoHub.controller;
 
 
 import ch.qos.logback.core.Layout;
+import jakarta.transaction.TransactionScoped;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,16 +47,6 @@ public class TopicoController {
         return  ResponseEntity.ok(page);
     }
 
-    @GetMapping("/{id}")
-    public  ResponseEntity detalleTopico(@PathVariable Long id){
-        Optional<Topico> topicoOptional = topicoRepository.findById(id);
-        if (topicoOptional.isEmpty()) {
-            String mensaje = "⚠️ El ID " + id + " no corresponde a ningún tópico registrado.";
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensaje);
-        }
-        Topico topico = topicoOptional.get();
-        return ResponseEntity.ok(new DatosDetalleTopico(topico));
-    }
     @Transactional
     @PutMapping("/{idTopico}") //  @RequestBody despues de id para evitar que no cargue los datos de la peticion
     public  ResponseEntity actualizar(@PathVariable Long idTopico, @RequestBody  @Valid DatosActualizarTopico datos){
@@ -84,5 +75,38 @@ public class TopicoController {
         String mensaje = "⚠️ ⚠️El ID " + idTopico + " no corresponde a ningún tópico registrado.";
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensaje);
 
+    }
+
+    @Transactional
+    @DeleteMapping("/{idTopico}")
+    public ResponseEntity delete (@PathVariable Long idTopico){
+        if(idTopico==null){
+            String mensaje = "⚠️ ⚠️⚠️ NO existe id en la peticion";
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(mensaje);
+        }
+        Optional<Topico> topicoOptional = topicoRepository.findById(idTopico);
+        if (topicoOptional.isPresent()) {
+            Topico topico = topicoOptional.get();
+            System.out.println("eliminado topico: "+ topico);
+            topico.eliminar();
+            return ResponseEntity.noContent().build();
+        } else {
+            String mensaje = "⚠️ ⚠️El ID " + idTopico + " no corresponde a ningún tópico registrado.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensaje);
+        }
+    }
+
+
+    @Transactional
+    @GetMapping("/{id}")
+    public  ResponseEntity detalleTopico(@PathVariable Long id){
+        System.out.println("buscado topico.....");
+        Optional<Topico> topicoOptional = topicoRepository.findById(id);
+        if (topicoOptional.isEmpty()) {
+            String mensaje = "⚠️ El ID " + id + " no corresponde a ningún tópico registrado.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mensaje);
+        }
+        Topico topico = topicoOptional.get();
+        return ResponseEntity.ok(new DatosDetalleTopico(topico));
     }
 }

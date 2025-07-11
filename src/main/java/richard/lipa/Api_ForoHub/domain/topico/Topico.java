@@ -80,4 +80,7 @@ public class Topico {
 
     }
 
+    public void eliminar() {
+        this.state=false;
+    }
 }
