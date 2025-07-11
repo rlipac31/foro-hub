@@ -24,7 +24,9 @@ public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Setter
     private  String titulo;
+    @Setter
     private  String mensaje;
     @Column(name = "fecha_creacion") // <--- ¡AÑADE ESTA ANOTACIÓN!
     private LocalDateTime fechaCreacion;
@@ -32,6 +34,7 @@ public class Topico {
     @JoinColumn(name = "usuario_id")
     @JsonIgnore // <--- ¡AÑADE ESTA ANOTACIÓN!
     private Usuario autor;
+    @Setter
     @Embedded
     private Curso curso;
     private Boolean state;
@@ -46,5 +49,35 @@ public class Topico {
         this.state = true;
     }
 
+
+
+    public void actualizarInformaciones(@Valid DatosActualizarTopico datos, Curso cursoUpdates) {
+        // Actualizar campos directos
+        if(datos.titulo() != null && !datos.titulo().equals(this.titulo)) {
+            System.out.println("entro al modificar titulo");
+            this.titulo = datos.titulo();
+        }
+        if(datos.mensaje() != null && !datos.mensaje().equals(this.mensaje)) {
+            System.out.println("entro al modificar mensage");
+            this.mensaje = datos.mensaje();
+        }
+        System.out.println("no entro a modificar titulo ni mensage");
+        // Actualizar el curso embebido
+        if(cursoUpdates != null) {
+
+            if(this.curso == null) {
+                this.curso = new Curso(); // Inicializar si es null
+            }
+
+            if(cursoUpdates.getNombreCurso() != null) {
+                System.out.println("entro al modificar curso");
+                this.curso.setNombreCurso(cursoUpdates.getNombreCurso());
+            }
+            if(cursoUpdates.getCategoriaCurso() != null) {
+                this.curso.setCategoriaCurso(cursoUpdates.getCategoriaCurso());
+            }
+        }
+
+    }
 
 }
