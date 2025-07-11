@@ -30,7 +30,7 @@ public record DatosListaTopicos(
                 topico.getCurso().getNombreCurso(),
                 topico.getCurso().getCategoriaCurso(),
                 topico.getFechaCreacion().format(
-                        DateTimeFormatter.ofPattern("d 'de' MMMM 'del' yyyy", new Locale("es", "ES"))
+                        DateTimeFormatter.ofPattern("d 'de' MMMM 'del' yyyy 'a las' h:mm a", new Locale("es", "ES"))
                 ), // ← aquí se genera la cadena formateada
                 topico.getState()
         );

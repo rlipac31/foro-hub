@@ -5,16 +5,20 @@ import richard.lipa.Api_ForoHub.domain.curso.Curso;
 import richard.lipa.Api_ForoHub.domain.usuario.Usuario;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
+/*
+* ítulo, mensaje, fecha de creación, estado, autor y curso*/
 public record DatosDetalleTopico(
         Long id,
         String titulo,
         String mensaje,
         String usuario_autor,
         String usuario_email,
-        String usuario_perfil,
         Curso curso,
-        LocalDateTime fechaCreacion
+        String fechaCreacion,
+        Boolean state
 ) {
     public DatosDetalleTopico(Topico topico) {
         this(
@@ -23,9 +27,11 @@ public record DatosDetalleTopico(
                 topico.getMensaje(),
                 topico.getAutor().getNombre(),
                 topico.getAutor().getEmail(),
-                topico.getAutor().getPerfil().name(),
                 topico.getCurso(),
-                topico.getFechaCreacion()
+                topico.getFechaCreacion().format(
+                        DateTimeFormatter.ofPattern( "d 'de' MMMM 'del' yyyy 'a las' h:mm a", new Locale("es", "ES"))
+                ),
+                topico.getState()
         );
     }
 }
