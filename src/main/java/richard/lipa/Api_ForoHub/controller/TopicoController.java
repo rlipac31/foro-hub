@@ -2,6 +2,7 @@ package richard.lipa.Api_ForoHub.controller;
 
 
 import ch.qos.logback.core.Layout;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.TransactionScoped;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name="bearer-key")// @Anotacion de springDocs OpenApi se coloca al principio para poder acceder al header token bearer
 public class TopicoController {
     @Autowired
     private UsuarioRepository usuarioRepository;

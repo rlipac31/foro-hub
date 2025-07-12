@@ -40,6 +40,10 @@ public class TokenService {
     }
 
     public String getSubject(String tokenJWT) {//verificar usuario
+        if(tokenJWT == null || tokenJWT.isEmpty()){
+            System.out.println("No hay token .....");
+            throw new RuntimeException("No existe token en la peticion");
+        }
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return  JWT.require(algoritmo)

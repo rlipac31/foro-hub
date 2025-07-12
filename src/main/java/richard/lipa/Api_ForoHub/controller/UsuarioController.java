@@ -1,6 +1,7 @@
 package richard.lipa.Api_ForoHub.controller;
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import richard.lipa.Api_ForoHub.domain.usuario.UsuarioRepository;
 
 @RestController
 @RequestMapping("/usuarios")
+@SecurityRequirement(name="bearer-key")
 public class UsuarioController {
 
         @Autowired
