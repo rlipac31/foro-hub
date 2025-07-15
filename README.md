@@ -28,12 +28,27 @@ La API ForoHub ofrece las siguientes capacidades:
 * **👥 Gestión de Usuarios:**
     * **Registro:** Creación de nuevas cuentas de usuario.
     * **Login:** Autenticación de usuarios para obtener un token JWT.
+  * **Crear Usuario:** Crear usuarios.
+  * **Listar Usuarios:** Consultar todos los usuarios existentes, con opciones de paginación y ordenamiento.
+  * **Buscar Usuario:** Encontrar usuarios específicos por ID u otros criterios.
+  * **Actualizar Usuario:** Modificar el contenido de usuarios existentes.
+  * **Eliminar Usuario:** Eliminar usuarios del foro.
+  
+
 * **💬 Gestión de Tópicos (CRUD Completo):**
     * **Crear Tópico:** Publicar nuevos temas de discusión en el foro.
     * **Listar Tópicos:** Consultar todos los tópicos existentes, con opciones de paginación y ordenamiento.
     * **Buscar Tópico:** Encontrar tópicos específicos por ID u otros criterios.
     * **Actualizar Tópico:** Modificar el contenido de tópicos existentes.
-    * **Eliminar Tópico:** Eliminar tópicos del foro.
+    * **Eliminar Tópico:** Eliminar tópicos del foro.  
+    
+
+* * **💬 Gestión de Respuestas (CRUD Completo):**
+  * **Crear Respuesta:** Realizar respuestas de discusión en el foro.
+  * **Listar Respuestas:** Consultar todos las respuestas existentes, con opciones de paginación y ordenamiento.
+  * **Buscar Respuesta:** Encontrar respuestas específicas por ID u otros criterios.
+  * **Actualizar Respuesta:** Modificar el contenido de respuestas existentes.
+  * **Eliminar Respuesta:** Eliminar respuestas del foro.
 
 ## 🛠️ Cómo Clonar y Probar el Proyecto
 

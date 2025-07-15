@@ -28,6 +28,7 @@ public class Usuario  implements UserDetails {
     private  String contrasenia;
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
+    private Boolean state;
 
     public Usuario(@Valid DatosRegistroUsuario datos) {
         this.id = null;
@@ -35,6 +36,11 @@ public class Usuario  implements UserDetails {
         this.email = datos.email();
         this.contrasenia = datos.contrasenia();
         this.perfil = datos.perfil();
+        this.state = true;
+    }
+
+    public void eliminar(){
+        this.state = false;
     }
 
     @Override
@@ -70,5 +76,17 @@ public class Usuario  implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void actualizarInformaciones(DatosActualizarUsuario datos) {
+        if(datos.nombre() != null){
+            this.nombre=datos.nombre();
+        }
+      /*  if(datos.contrasenia() != null){
+            this.contrasenia=datos.contrasenia();
+        }*/
+        if(datos.perfil() != null){
+            this.perfil=datos.perfil();
+        }
     }
 }

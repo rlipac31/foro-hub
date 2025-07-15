@@ -7,7 +7,8 @@ public record DatosDetalleUsuario(
         String nombre,
         String email,
         String contrasenia,
-        Perfil perfil
+        Perfil perfil,
+        Boolean state
 ) {
     public DatosDetalleUsuario(Usuario usuario) {
         this(
@@ -15,7 +16,8 @@ public record DatosDetalleUsuario(
                 usuario.getNombre(),
                 usuario.getEmail(),
                 usuario.getContrasenia(),
-                usuario.getPerfil()
+                usuario.getPerfil(),
+                usuario.getState()
         );
     }
 }
